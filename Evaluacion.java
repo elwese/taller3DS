@@ -1,11 +1,13 @@
-public class Evaluacion {
-    private String titulo;
+public class Evaluacion extends ActividadAcademica {
+    private int puntajeMaximo;
 
-    public Evaluacion(String titulo) {
-        this.titulo = titulo;
+    public Evaluacion(String titulo, String descripcion, String fechaEntrega, int puntajeMaximo) {
+        super(titulo, descripcion, fechaEntrega);
+        this.puntajeMaximo = puntajeMaximo;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public int getPuntajeMaximo() {
+        return puntajeMaximo;
     }
 }
+

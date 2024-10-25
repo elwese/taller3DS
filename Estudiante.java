@@ -13,4 +13,3 @@ public class Estudiante extends Usuario {
         System.out.println("Estudiante " + getNombre() + " se ha inscrito en el curso " + curso.getNombre());
     }
 }
-

@@ -8,8 +8,8 @@ public class Usuario {
     }
 
     public void reportarProblema(SoporteTecnico soporte, String descripcion) {
-        ReporteProblema reporte = new ReporteProblema(this, descripcion);
-        soporte.recibirReporte(reporte);
+        Incidente incidente = new Incidente(this, descripcion);
+        soporte.recibirIncidente(incidente); 
     }
 
     public String getNombre() {
@@ -20,4 +20,5 @@ public class Usuario {
         return email;
     }
 }
+
 

@@ -1,40 +1,25 @@
+import java.util.ArrayList;
 import java.util.List;
 
+
 public class SoporteTecnico {
-    private List<ReporteProblema> reportes; 
+    private List<Incidente> incidentes; 
 
-    public SoporteTecnico(List<ReporteProblema> reportes) {
-        this.reportes = reportes;
+    public SoporteTecnico() {
+        this.incidentes = new ArrayList<>();
     }
 
-    public void recibirReporte(ReporteProblema reporte) {
-        reportes.add(reporte);
-        analizarProblema(reporte);
+    public void recibirIncidente(Incidente incidente) {
+        incidentes.add(incidente);
+        analizarIncidente(incidente);
     }
 
-    public void analizarProblema(ReporteProblema reporte) {
-        // Lógica para analizar el problema
-        if (esProblemaDeGestion(reporte)) {
-            derivarAAdministrador(reporte);
-        } else {
-            resolverProblema(reporte);
-        }
+    public void analizarIncidente(Incidente incidente) {
+        resolverProblema(incidente); 
     }
 
-    public void notificarUsuario(Usuario usuario) {
+    private void resolverProblema(Incidente incidente) {
         
-    }
-
-    private boolean esProblemaDeGestion(ReporteProblema reporte) {
-        
-        return false; 
-    }
-
-    private void resolverProblema(ReporteProblema reporte) {
-        
-    }
-
-    private void derivarAAdministrador(ReporteProblema reporte) {
-        
+        incidente.resolver();
     }
 }

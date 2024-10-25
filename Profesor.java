@@ -1,65 +1,49 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Profesor extends Usuario {
-    private List<Curso> cursosImpartidos;
+public class Profesor {
+    private String nombre;
+    private String email;
 
     public Profesor(String nombre, String email) {
-        super(nombre, email);
-        this.cursosImpartidos = new ArrayList<>();
-    }
-
-    public void planificarCurso() {
-        
+        this.nombre = nombre;
+        this.email = email;
     }
 
     public void cargarMaterialEducativo(Curso curso, String titulo, String descripcion, List<String> archivos) {
-        if (cursosImpartidos.contains(curso)) {
-            if (archivos.isEmpty()) {
-                mostrarMensajeError("Error: No se han seleccionado archivos válidos.");
-                return;
-            }
+        MaterialEducativo material = new MaterialEducativo(titulo, descripcion, archivos);
+        curso.agregarMaterial(material);
+        System.out.println("Material educativo cargado exitosamente en el curso: " + curso.getNombre());
+    }
 
-            for (String archivo : archivos) {
-                if (!esArchivoValido(archivo)) {
-                    mostrarMensajeError("Error: El archivo " + archivo + " no es válido.");
-                    return;
-                }
-            }
-
-            MaterialEducativo material = new MaterialEducativo(titulo, descripcion, archivos);
-            curso.agregarMaterial(material);
-            mostrarVentanaCargaExitosa();
-        } else {
-            mostrarMensajeError("Error: El profesor no está autorizado para cargar material en este curso.");
+    
+    public void crearTarea(Curso curso, String titulo, String descripcion, String fechaEntrega, String criteriosEvaluacion, List<MaterialEducativo> materiales) {
+        Tarea tarea = new Tarea(titulo, descripcion, fechaEntrega, criteriosEvaluacion);
+        for (MaterialEducativo material : materiales) {
+            tarea.agregarMaterial(material);
         }
+        curso.agregarTarea(tarea);
+        System.out.println("Tarea creada exitosamente en el curso: " + curso.getNombre());
     }
 
-    public void gestionarCargaMaterial(Curso curso) {
-        System.out.println("Seleccionando curso: " + curso.getNombre());
-
-        
-        String titulo = "Título del material"; 
-        String descripcion = "Descripción del material"; 
-        List<String> archivos = new ArrayList<>();
-        archivos.add("material1.pdf"); 
-        archivos.add("material_invalido.docx"); 
-        cargarMaterialEducativo(curso, titulo, descripcion, archivos);
+    
+    public void crearEvaluacion(Curso curso, String titulo, String descripcion, String fechaEntrega, int puntajeMaximo, List<MaterialEducativo> materiales) {
+        Evaluacion evaluacion = new Evaluacion(titulo, descripcion, fechaEntrega, puntajeMaximo);
+        for (MaterialEducativo material : materiales) {
+            evaluacion.agregarMaterial(material);
+        }
+        curso.agregarEvaluacion(evaluacion);
+        System.out.println("Evaluación creada exitosamente en el curso: " + curso.getNombre());
     }
 
-    private void mostrarVentanaCargaExitosa() {
-        System.out.println("Material educativo cargado exitosamente.");
+    public String getNombre() {
+        return nombre;
     }
 
-    private void mostrarMensajeError(String mensaje) {
-        System.out.println(mensaje);
-    }
-
-    private boolean esArchivoValido(String archivo) {
-        return archivo.endsWith(".pdf") || archivo.endsWith(".pptx") || archivo.endsWith(".mp4");
-    }
-
-    public List<Curso> getCursosImpartidos() {
-        return cursosImpartidos;
+    public String getEmail() {
+        return email;
     }
 }
+
+
+

@@ -1,11 +1,12 @@
-public class Tarea {
-    private String titulo;
+public class Tarea extends ActividadAcademica {
+    private String criteriosEvaluacion;
 
-    public Tarea(String titulo) {
-        this.titulo = titulo;
+    public Tarea(String titulo, String descripcion, String fechaEntrega, String criteriosEvaluacion) {
+        super(titulo, descripcion, fechaEntrega);
+        this.criteriosEvaluacion = criteriosEvaluacion;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getCriteriosEvaluacion() {
+        return criteriosEvaluacion;
     }
 }
